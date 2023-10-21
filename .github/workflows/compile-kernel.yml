@@ -58,6 +58,7 @@ on:
         options:
           - -ophub
           - -yourname
+          - -binder-psi-mod
 
 env:
   TZ: America/New_York
