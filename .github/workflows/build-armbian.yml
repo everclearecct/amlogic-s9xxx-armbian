@@ -160,6 +160,7 @@ on:
         type: choice
         options:
           - ophub/kernel
+          - everclearecct/ophub_kernel
       kernel_usage:
         description: "Set the tags of the stable kernel."
         required: false
@@ -170,6 +171,7 @@ on:
           - flippy
           - dev
           - beta
+          - rk35
       armbian_fstype:
         description: "Select armbian rootfs type."
         required: false
@@ -195,6 +197,7 @@ on:
           - ophub
           - angel
           - yourname
+          - everclear
 
 env:
   TZ: America/New_York
