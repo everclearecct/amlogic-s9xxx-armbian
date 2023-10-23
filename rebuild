@@ -1001,7 +1001,8 @@ refactor_rootfs() {
     # Add Mali Userspace Binary Driver (!test!)
     cd ${tmp_outpath}
     wget https://github.com/tsukumijima/libmali-rockchip/releases/download/v1.9-1-53c16ef/libmali-bifrost-g52-g13p0-wayland-gbm_1.9-1_arm64.deb
-    dpkg -i --root=${tag_rootfs} --admindir=${tag_rootfs}/var/lib/dpkg libmali*.deb
+    dpkg-deb -x libmali*.deb libmali
+    cp -r libmali/* ${tag_rootfs}
     cd ${tag_rootfs}
 
     # Add custom Armbian information
