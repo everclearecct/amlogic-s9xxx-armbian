@@ -244,6 +244,15 @@ jobs:
         run: |
           # Compile method and parameter description: https://docs.armbian.com/Developer-Guide_Build-Options
           cd build/
+          # Add Mali Userspace Binary Driver (!test!)
+          mkdir userpatches
+          echo "#!/bin/bash" > userpatches/customize-image.sh
+          echo "wget -O tmp/libmali.deb https://github.com/tsukumijima/libmali-rockchip/releases/download/v1.9-1-53c16ef/libmali-bifrost-g52-g13p0-wayland-gbm_1.9-1_arm64.deb" >> userpatches/customize-image.sh
+          echo "apt update" >> userpatches/customize-image.sh
+          echo "apt install -y /tmp/libmali.deb" >> userpatches/customize-image.sh
+          echo "apt clean" >> userpatches/customize-image.sh
+          echo "rm /tmp/libmali.deb" >> userpatches/customize-image.sh
+              
               ./compile.sh RELEASE=${{ inputs.set_release }} BOARD=odroidn2 BRANCH=current BUILD_MINIMAL=no \
                            BUILD_ONLY=default HOST=armbian BUILD_DESKTOP=no EXPERT=yes KERNEL_CONFIGURE=no \
                            COMPRESS_OUTPUTIMAGE="sha" SHARE_LOG=yes
