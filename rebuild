@@ -998,14 +998,6 @@ refactor_rootfs() {
         sed -i "s/macaddr=.*/macaddr=${random_macaddr}:08/" "brcmfmac4359-sdio.ali,ct2000.txt"
     )
 
-    # Add Mali Userspace Binary Driver (!test!)
-    wget -O tmp/libmali.deb https://github.com/tsukumijima/libmali-rockchip/releases/download/v1.9-1-53c16ef/libmali-bifrost-g52-g13p0-wayland-gbm_1.9-1_arm64.deb
-    apt install -y qemu-user-static
-    cp /usr/bin/qemu-aarch64-static usr/bin/
-    chroot . apt install -y /tmp/libmali.deb
-    chroot . apt clean
-    rm usr/bin/qemu-aarch64-static tmp/libmali.deb
-
     # Add custom Armbian information
     echo "PLATFORM='${PLATFORM}'" >>${ophub_release_file}
     echo "VERSION_CODEID='${release_codeid}'" >>${ophub_release_file}
